@@ -1,0 +1,211 @@
+/* Scene-ul principal de mining */
+.mining-scene {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  border: 3px solid #7f8c8d;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+/* Mine vizuale */
+.mine-tunnel {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to top, #5d4037, #8d6e63);
+  clip-path: polygon(0% 100%, 100% 100%, 80% 40%, 20% 40%);
+}
+
+.mine-walls {
+  position: absolute;
+  bottom: 200px;
+  width: 100%;
+  height: 200px;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      #5d4037,
+      #5d4037 20px,
+      #4e342e 20px,
+      #4e342e 40px
+    );
+}
+
+/* Lift animat */
+.lift-shaft {
+  position: absolute;
+  right: 50px;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(90deg, #795548, #8d6e63);
+  border-left: 3px solid #6d4c41;
+  border-right: 3px solid #6d4c41;
+}
+
+.lift {
+  position: absolute;
+  bottom: 0;
+  width: 50px;
+  height: 80px;
+  background: linear-gradient(160deg, #8B4513 0%, #A0522D 100%);
+  border: 2px solid #654321;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 3s ease-in-out;
+}
+
+.lift.moving {
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.lift.moving .mine-cart {
+  animation: cartShake 0.8s infinite;
+}
+
+@keyframes cartShake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-3px) rotate(-1deg); }
+  75% { transform: translateX(3px) rotate(1deg); }
+}
+
+/* Miner animat */
+.miner {
+  position: absolute;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 60px;
+}
+
+.miner.mining .miner__pickaxe {
+  animation: miningSwing 1.5s infinite;
+  transform-origin: top left;
+}
+
+@keyframes miningSwing {
+  0% { transform: rotate(0deg) translateX(0); }
+  50% { transform: rotate(60deg) translateX(10px); }
+  100% { transform: rotate(0deg) translateX(0); }
+}
+
+.miner__body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.miner__pickaxe {
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Efecte de particule */
+.mining-particles {
+  position: absolute;
+  top: -20px;
+  left: 0;
+}
+
+.mining-particle {
+  position: absolute;
+  animation: particleFloat 1s ease-in forwards;
+  opacity: 0;
+  font-size: 12px;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-30px) scale(0.5); opacity: 0; }
+}
+
+/* Numere animate */
+.animated-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f1c40f;
+  text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+  animation: numberPulse 2s infinite;
+}
+
+@keyframes numberPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Bare de progres */
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: #34495e;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e74c3c, #f39c12);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+  animation: progressGlow 2s infinite;
+}
+
+@keyframes progressGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(243, 156, 18, 0.5); }
+  50% { box-shadow: 0 0 15px rgba(243, 156, 18, 0.8); }
+}
+
+.mining-scene {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 3px solid #0f3460;
+  border-radius: 15px;
+  padding: 20px;
+  position: relative;
+  min-height: 300px;
+}
+
+.mine-structure {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: 
+    linear-gradient(45deg, #2c2c54, #40407a),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 50px,
+      rgba(255,255,255,0.1) 50px,
+      rgba(255,255,255,0.1) 100px
+    );
+}
+
+.visual-lift {
+  position: absolute;
+  right: 50px;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: linear-gradient(90deg, #474787, #706fd3);
+  border-left: 3px solid #2c2c54;
+  border-right: 3px solid #2c2c54;
+}
+
+.miner-character {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  background: #ff9f1a;
+  border-radius: 5px;
+  animation: mineAnimation 2s infinite;
+}
