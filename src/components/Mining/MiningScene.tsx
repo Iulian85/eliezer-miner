@@ -4,6 +4,7 @@ import { useGameStore } from '../../hooks/useGameStore';
 import Miner from '../Animations/Miner';
 import Lift from '../Animations/Lift';
 import { format } from '../../utils/formatNumber';
+import { GameState } from '../../types/game';
 
 const levels = [
   { id: 161, income: 563_000_000, x: 15, y: 25 },
@@ -20,11 +21,12 @@ export default function MiningScene() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    updateState((prev) => ({
+    updateState((prev: GameState) => ({
       ...prev,
       stats: {
         ...prev.stats,
-        elzrBalance: prev.stats.elzrBalance + stats.miningPower
+        elzrBalance: prev.stats.elzrBalance + stats.miningPower,
+        experience: prev.stats.experience + 1
       }
     }));
 
@@ -33,28 +35,37 @@ export default function MiningScene() {
   };
 
   return (
-    <div className="relative h-screen overflow-hidden bg-sky-300">
+    <div className="relative h-screen overflow-hidden bg-gradient-to-b from-sky-300 to-sky-100">
       {/* FUNDAL */}
       <div className="absolute inset-0 z-0">
         <svg className="w-full h-full" viewBox="0 0 100 100">
-          <rect width="100" height="100" fill="url(#sky)" />
           <defs>
             <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#87CEEB" />
               <stop offset="100%" stopColor="#E0F6FF" />
             </linearGradient>
           </defs>
+          <rect width="100" height="100" fill="url(#sky)" />
           <circle cx="50" cy="15" r="8" fill="#FFD700" />
-          <path d="M0,40 Q25,20 50,35 T100,40 L100,100 L0,100 Z" fill="#8B7355" />
+          <path d="M0,40 Q25,20 50,35 T100,40 L100,100 L0,100 Z" fill="#8B7355" opacity="0.9" />
+          <g fill="#228B22">
+            <circle cx="15" cy="65" r="4" />
+            <circle cx="35" cy="68" r="3.5" />
+            <circle cx="55" cy="64" r="4" />
+            <circle cx="75" cy="67" r="3.8" />
+            <circle cx="95" cy="66" r="4" />
+          </g>
+          <rect x="0" y="75" width="100" height="25" fill="#D2B48C" />
+          <path d="M0,75 Q10,73 20,75 T40,75 T60,75 T80,75 T100,75 z" fill="#90EE90" opacity="0.7" />
         </svg>
       </div>
 
-      {/* LIFT */}
-      <div className="absolute inset-0 z-20">
+      {/* LIFT - z-20 */}
+      <div className="absolute inset-0 z-20 pointer-events-none">
         <Lift isActive={true} />
       </div>
 
-      {/* NIVELURI */}
+      {/* NIVELURI - z-10 */}
       <div className="absolute inset-0 z-10">
         {levels.map(level => (
           <div
@@ -71,6 +82,7 @@ export default function MiningScene() {
                 <div className="font-bold text-lg">Nivel {level.id}</div>
                 <div className="text-yellow-300 text-sm font-bold">{format(level.income)}/s</div>
               </div>
+
               <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 flex gap-2">
                 <Miner isActive={true} />
               </div>
@@ -79,7 +91,7 @@ export default function MiningScene() {
         ))}
       </div>
 
-      {/* CLICK EFFECT */}
+      {/* CLICK EFFECT - z-30 */}
       {clickEffect && (
         <motion.div
           className="absolute text-yellow-400 font-bold text-3xl pointer-events-none drop-shadow-lg z-30"

@@ -16,6 +16,6 @@ export function useGameLoop() {
       }));
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(interval); // → NU testa void în if
   }, []);
 }
